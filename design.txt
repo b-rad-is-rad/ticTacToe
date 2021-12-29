@@ -1,0 +1,45 @@
+Thoughts on how to implement
+
+- 3 X's or O's in a row wins the Game
+    - Check on each turn starting on Player 1's 3rd turn
+    - How to Check for 3 in a row
+            - From position, check if diagonal is possible
+                - X and Y are both 1 or 3
+                - X and Y are 2
+            - Check each directional for 3 in a row
+                - Loop valid directionals (h, v, 1d, 2d)
+                    - Horizontal (always)
+                        - x,1 x,2 x,3
+                    - Vertical (always)
+                        - 1,y 2,y 3,Y
+                    - Diagonal (5 spaces)
+                        - Find diagonal direction. Figure out how to get to 2 for each coord then continue on that path.
+                        - Ex: 3,1 ... to get each coord to 2,2 we must do -1,+1
+                        - If 2,2 we do 2 diagonal checks
+                            - top left to bottom right
+                            - bottom left to top right
+                - Stop check on opposing marker or empty space
+                - No need to check space that player chose
+
+- 3x3 board (9 spaces)
+    - X/Y Coordinates
+    - Each cell is an instance of class Cell
+        - Cell
+            - Location {obj}
+                - x
+                - y
+            - Player Assignment {str}
+                - x or o
+- Each space can only be used once
+    - Activate/deactivate cell after clicked. Add X or O to cell instance and disable cell via CSS.
+- Clicking in a space assigns the space and starts next turn
+    - onClick call togglePlayer()
+- Randomly assign if X or O goes first for first game
+    - Math.rand 0 or 1
+- Winning the game disables the game and allows for reset
+    - endGame(player) - ends game with the passed player as the winner
+- When a tie has occurred, disables the game and allows for reset
+    - endGame() - ends game in a tie
+- Reset game button available at all times and highlighted at game end
+- X and O alternate turns on reset
+    - Toggle current player

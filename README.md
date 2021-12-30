@@ -1,5 +1,5 @@
 # Tic Tac Toe
-Designing and building a tic tac toe game from scratch.
+Designing and building a tic tac toe game from scratch with no tutorials or starter code.
 
 # Requirements
 

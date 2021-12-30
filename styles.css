@@ -31,6 +31,10 @@ body {
   flex-wrap: nowrap;
 }
 
+.row:nth-of-type(-n + 2) {
+    border-bottom: 2px solid white;
+  }
+
 .cell {
   font-size: 5em;
   text-align: center;
@@ -39,10 +43,6 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
-}
-
-.row:nth-of-type(-n + 2) {
-  border-bottom: 2px solid white;
 }
 
 .cell:nth-of-type(-n + 2) {

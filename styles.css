@@ -1,0 +1,49 @@
+body {
+  font-family: 'Roboto', sans-serif;
+  background-color: #47454b;
+  height: 100vh;
+  width: 100vw;
+  margin: 0;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+#board {
+  color: white;
+  min-width: 275px;
+  min-height: 450px;
+  height: 500px;
+  display: flex;
+  flex-direction: column;
+  flex-wrap: nowrap;
+  flex-basis: 60vmin;
+}
+
+.row {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-grow: 1;
+  flex-wrap: nowrap;
+}
+
+.cell {
+  font-size: 2.5em;
+  text-align: center;
+  height: 100%;
+  flex-grow: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.row:nth-of-type(-n + 2) {
+  border-bottom: 2px solid white;
+}
+
+.cell:nth-of-type(-n + 2) {
+  border-right: 2px solid white;
+}

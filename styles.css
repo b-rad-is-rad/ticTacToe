@@ -1,5 +1,6 @@
 body {
   font-family: 'Roboto', sans-serif;
+  font-size: 10px;
   background-color: #47454b;
   height: 100vh;
   width: 100vw;
@@ -15,7 +16,7 @@ body {
   color: white;
   min-width: 275px;
   min-height: 450px;
-  height: 500px;
+  height: 70vh;
   display: flex;
   flex-direction: column;
   flex-wrap: nowrap;
@@ -31,7 +32,7 @@ body {
 }
 
 .cell {
-  font-size: 2.5em;
+  font-size: 5em;
   text-align: center;
   height: 100%;
   flex-grow: 1;

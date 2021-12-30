@@ -1,7 +1,7 @@
 # Tic Tac Toe
 Designing and building a tic tac toe game from scratch with no tutorials or starter code.
 
-# Requirements
+## Requirements
 
 - 3 X's or O's in a row wins the Game
     - Vertical
@@ -15,7 +15,7 @@ Designing and building a tic tac toe game from scratch with no tutorials or star
 - X and O alternate turns
 - Clicking in a space assigns the space and starts next turn
 
-# Styling
+## Styling
 
 - Animation on click for X's and O's
 - Animation/change when game is over

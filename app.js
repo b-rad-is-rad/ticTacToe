@@ -1,23 +1,16 @@
+import { startGame } from './lib.js'
 const cells = document.querySelectorAll('.cell')
+const board = document.querySelector('#board')
+const rows = document.querySelectorAll('.row')
+const resetButton = document.querySelector('#reset')
 
-const togglePlayer = () => {
-    currentPlayer = currentPlayer === 'X' ? 'O' : 'X'
+const resetGame = e => {
+  // Bring board back to white
+  board.classList.toggle('gameOver')
+  for (const cell of cells) cell.classList.toggle('gameOver')
+  for (const row of rows) row.classList.toggle('gameOver')
+  startGame(board, cells)
 }
+resetButton.addEventListener('click', resetGame)
 
-const setMarker = (e) => {
-    e.target.children[0] ? e.target.children[0].innerText = currentPlayer : e.target.innerText = currentPlayer
-    togglePlayer()
-}
-
-const setup = () => {
-  // clear board
-  for (const cell of cells) {
-    cell.children[0].innerText = ''
-    cell.addEventListener('click', setMarker, {once: true, })
-  }
-
-  // return random starting player
-  return Math.floor(Math.random() * 2) ? 'X' : 'O'
-}
-
-let currentPlayer = setup()
+startGame(board, cells)

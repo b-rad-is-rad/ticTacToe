@@ -9,9 +9,9 @@ Thoughts on how to implement
             - Check each directional for 3 in a row
                 - Loop valid directionals (h, v, 1d, 2d)
                     - Horizontal (always)
-                        - x,1 x,2 x,3
+                        - 1,y 2,y 3,y
                     - Vertical (always)
-                        - 1,y 2,y 3,Y
+                        - x,1 x,2 x,3
                     - Diagonal (5 spaces)
                         - Find diagonal direction. Figure out how to get to 2 for each coord then continue on that path.
                         - Ex: 3,1 ... to get each coord to 2,2 we must do -1,+1

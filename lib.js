@@ -2,13 +2,16 @@ const togglePlayer = board => {
   board.currentPlayer = board.currentPlayer === 'X' ? 'O' : 'X'
 }
 
-// const reset = () {
+const endGame = (cells, board) => {
+  // grey out board
+  board.classList.toggle('gameOver')
+  for (const cell of cells) cell.classList.toggle('gameOver')
+  const rows = document.querySelectorAll('.row')
+  for (const row of rows) row.classList.toggle('gameOver')
 
-// }
-
-const endGame = (cells, currentPlayer) => {
-  if (currentPlayer) {
-    console.log(`${currentPlayer} won the game!`)
+  // display winner / tie msg
+  if (board.currentPlayer) {
+    console.log(`${board.currentPlayer} won the game!`)
     for (const cell of cells) {
       if (cell.children[0].innerText === '') cell.removeEventListener('click', setMarker)
     }
@@ -24,6 +27,7 @@ const checkDirection = (cellsArr, filter) => {
     .every(el => el === board.currentPlayer)
 }
 
+// check to see if the current player won the game
 const winCond = (cells, currentCell) => {
   const cellsArr = Array.from(cells)
   // Check Directions for 3 in a row
@@ -53,7 +57,7 @@ const setMarker = e => {
   // check for endGame() condition, earliest game can end is turn 5
   if (board.totalTurns >= 5) {
     if (winCond(cells, currentCell)) {
-      endGame(cells, board.currentPlayer)
+      endGame(cells, board)
     } else {
       if (board.totalTurns === 9) {
         endGame(cells)
@@ -66,10 +70,10 @@ const setMarker = e => {
   }
 }
 
+// init board
 export const startGame = (board, cells) => {
   let x = 1
   let y = 3
-  // initialize board
   for (const cell of cells) {
     cell.children[0].innerText = ''
     cell.addEventListener('click', setMarker, { once: true })

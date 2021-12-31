@@ -1,22 +1,45 @@
-const togglePlayer = (board) => {
+const togglePlayer = board => {
   board.currentPlayer = board.currentPlayer === 'X' ? 'O' : 'X'
 }
 
-const endGame = (currentPlayer) => {
-    if (currentPlayer) {
-        console.log(`${currentPlayer} won the game!`)
-    } else {
-        console.log(`It's a tie!`)
+// const reset = () {
+
+// }
+
+const endGame = (cells, currentPlayer) => {
+  if (currentPlayer) {
+    console.log(`${currentPlayer} won the game!`)
+    for (const cell of cells) {
+      if (cell.children[0].innerText === '') cell.removeEventListener('click', setMarker)
     }
+  } else {
+    console.log(`It's a tie!`)
+  }
 }
 
-const winner = (currentCell) => {
-  console.dir(currentCell)
-  return true
+const checkDirection = (cellsArr, filter) => {
+  return cellsArr
+    .filter(filter)
+    .map(el => el.children[0].innerText)
+    .every(el => el === board.currentPlayer)
 }
 
-const setMarker = (e) => {
+const winCond = (cells, currentCell) => {
+  const cellsArr = Array.from(cells)
+  // Check Directions for 3 in a row
+  const rowWin = checkDirection(cellsArr, el => el.gameY === currentCell.gameY)
+  const vertWin = checkDirection(cellsArr, el => el.gameX === currentCell.gameX)
+  // Only check the diags you need to
+  const onDiag = (currentCell.gameX - 2) / (currentCell.gameY - 2)
+  const diagPosWin = onDiag > 0 || isNaN(onDiag) ? checkDirection(cellsArr, el => el.gameX === el.gameY) : false
+  const diagNegWin = onDiag < 0 || isNaN(onDiag) ? checkDirection(cellsArr, el => el.gameX === 4 - el.gameY) : false
+
+  return rowWin || vertWin || diagPosWin || diagNegWin
+}
+
+const setMarker = e => {
   const board = document.querySelector('#board')
+  const cells = document.querySelectorAll('.cell')
   board.totalTurns++
   let currentCell
   // set marker
@@ -29,11 +52,11 @@ const setMarker = (e) => {
   }
   // check for endGame() condition, earliest game can end is turn 5
   if (board.totalTurns >= 5) {
-    if (winner(currentCell)) {
-      endGame(board.currentPlayer)
+    if (winCond(cells, currentCell)) {
+      endGame(cells, board.currentPlayer)
     } else {
       if (board.totalTurns === 9) {
-        endGame()
+        endGame(cells)
       } else {
         togglePlayer(board)
       }
